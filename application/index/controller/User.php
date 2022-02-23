@@ -66,7 +66,8 @@ class User extends Frontend
     public function userdevice()
     {
         //显示用户设备
-		echo "userdevice";
+		$this->view->assign('title', __('User device'));
+		return $this->view->fetch();
     }
 
     /**
