@@ -1,32 +1,7 @@
 <style>
-    .profile-avatar-container {
-        position:relative;
-        width:100px;
-    }
-    .profile-avatar-container .profile-user-img{
-        width:100px;
-        height:100px;
-    }
-    .profile-avatar-container .profile-avatar-text {
-        display:none;
-    }
-    .profile-avatar-container:hover .profile-avatar-text {
-        display:block;
-        position:absolute;
-        height:100px;
-        width:100px;
-        background:#444;
-        opacity: .6;
-        color: #fff;
-        top:0;
-        left:0;
-        line-height: 100px;
-        text-align: center;
-    }
-    .profile-avatar-container button{
-        position:absolute;
-        top:0;left:0;width:100px;height:100px;opacity: 0;
-    }
+	table tbody tr td{
+	   white-space: nowrap; <!--禁止换行-->
+	}
 </style>
 <div id="content-container" class="container">
     <div class="row">
@@ -38,7 +13,7 @@
                 <div class="panel-body">
 					<div class="table-responsive"> <!--表格自动水平滚动条-->
 						<!--<h2 class="page-header">{:__('Device')}</h2>-->
-						<table>
+						<table class="table table-hover table-bordered"> <!--边框+悬停表格-->
 							<thead>
 								<tr>
 									<td>IMEI</td>
@@ -54,14 +29,14 @@
 							<tbody>
 								{volist name='userdevice' id='u'}
 									<tr>
-										<th>{$u.imei}</th>
-										<th>{$u.model}</th>
-										<th>{$u.is_disable}</th>
-										<th>{$u.user_id}</th>
-										<th>{$u.sn}</th>
-										<th>{$u.imsi}</th>
-										<th>{$u.createtime}</th>
-										<th>{$u.updatetime}</th>
+										<td>{$u.imei}</td>
+										<td>{$u.model}</td>
+										<td>{$u.is_disable}</td>
+										<td>{$u.user_id}</td>
+										<td>{$u.sn}</td>
+										<td>{$u.imsi}</td>
+										<td>{$u.createtime}</td>
+										<td>{$u.updatetime}</td>
 									</tr>
 								{/volist}
 							</tbody>
@@ -75,3 +50,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
