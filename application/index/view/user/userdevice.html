@@ -36,35 +36,40 @@
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <!--<h2 class="page-header">{:__('Device')}</h2>-->
-					<table>
-						<thead>
-							<tr>
-								<td>IMEI</td>
-								<td>MODEL</td>
-								<td>is_disable</td>
-								<td>user_id</td>
-								<td>sn</td>
-								<td>imsi</td>
-								<td>createtime</td>
-								<td>updatetime</td>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach $userdevice as $u}
+					<div class="table-responsive"> <!--表格自动水平滚动条-->
+						<!--<h2 class="page-header">{:__('Device')}</h2>-->
+						<table>
+							<thead>
 								<tr>
-									<th>{$u.imei}</th>
-									<th>{$u.model}</th>
-									<th>{$u.is_disable}</th>
-									<th>{$u.user_id}</th>
-									<th>{$u.sn}</th>
-									<th>{$u.imsi}</th>
-									<th>{$u.createtime}</th>
-									<th>{$u.updatetime}</th>
+									<td>IMEI</td>
+									<td>MODEL</td>
+									<td>is_disable</td>
+									<td>user_id</td>
+									<td>sn</td>
+									<td>imsi</td>
+									<td>createtime</td>
+									<td>updatetime</td>
 								</tr>
-							{/foreach}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{volist name='userdevice' id='u'}
+									<tr>
+										<th>{$u.imei}</th>
+										<th>{$u.model}</th>
+										<th>{$u.is_disable}</th>
+										<th>{$u.user_id}</th>
+										<th>{$u.sn}</th>
+										<th>{$u.imsi}</th>
+										<th>{$u.createtime}</th>
+										<th>{$u.updatetime}</th>
+									</tr>
+								{/volist}
+							</tbody>
+						</table>
+						<div class ="text-center"> <!--内容居中显示-->
+							{$userdevice->render()} <!--分页显示-->
+						</div>
+					</div>
                 </div>
             </div>
         </div>

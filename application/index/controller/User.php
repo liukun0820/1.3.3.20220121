@@ -67,7 +67,7 @@ class User extends Frontend
      */
     public function userdevice()
     {
-		$rst = Db::name("shebei")->select();
+		$rst = Db::name("shebei")->paginate(5);
 		$this->view->assign('userdevice', $rst);
 		$this->view->assign('title', __('User device'));
 		return $this->view->fetch();
