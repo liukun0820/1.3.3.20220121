@@ -59,6 +59,15 @@ class User extends Frontend
         $this->view->assign('title', __('User center'));
         return $this->view->fetch();
     }
+	
+	/**
+     * 显示用户设备
+     */
+    public function userdevice()
+    {
+        //显示用户设备
+		echo "userdevice";
+    }
 
     /**
      * 注册会员
