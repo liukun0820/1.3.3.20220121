@@ -1,3 +1,3 @@
 # 1.3.3.20220121
-Fastadmin Ñ§Ï°¼ÇÂ¼
-½«fa_shebei.sqlµ¼ÈëÊı¾İ¿â
+Fastadmin å­¦ä¹ è®°å½•
+å°†fa_shebei.sqlå¯¼å…¥æ•°æ®åº“
