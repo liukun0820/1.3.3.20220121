@@ -12,8 +12,8 @@ use think\Cookie;
 use think\Hook;
 use think\Session;
 use think\Validate;
-// 使用数据库操作
-use think\Db;
+// 使用模型的数据库操作
+use app\index\model\Userdevice;
 
 /**
  * 会员中心
@@ -67,7 +67,8 @@ class User extends Frontend
      */
     public function userdevice()
     {
-		$rst = Db::name("shebei")->paginate(5);
+		$ud = new userdevice;
+		$rst = $ud->paginate(5);
 		$this->view->assign('userdevice', $rst);
 		$this->view->assign('title', __('User device'));
 		return $this->view->fetch();
