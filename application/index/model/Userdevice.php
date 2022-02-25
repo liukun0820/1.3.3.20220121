@@ -6,6 +6,6 @@ use think\Model;
 class Userdevice extends Model
 {
     // 表名
-    protected $name = 'shebei';
+    protected $name = 'userdevice';
     
 }

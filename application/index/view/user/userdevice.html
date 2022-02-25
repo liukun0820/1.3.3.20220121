@@ -12,38 +12,13 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 					<div class="table-responsive"> <!--表格自动水平滚动条-->
-						<!--<h2 class="page-header">{:__('Device')}</h2>-->
-						<table class="table table-hover table-bordered"> <!--边框+悬停表格-->
-							<thead>
-								<tr>
-									<td>IMEI</td>
-									<td>MODEL</td>
-									<td>is_disable</td>
-									<td>user_id</td>
-									<td>sn</td>
-									<td>imsi</td>
-									<td>createtime</td>
-									<td>updatetime</td>
-								</tr>
-							</thead>
-							<tbody>
-								{volist name='userdevice' id='u'}
-									<tr>
-										<td>{$u.imei}</td>
-										<td>{$u.model}</td>
-										<td>{$u.is_disable}</td>
-										<td>{$u.user_id}</td>
-										<td>{$u.sn}</td>
-										<td>{$u.imsi}</td>
-										<td>{$u.createtime}</td>
-										<td>{$u.updatetime}</td>
-									</tr>
-								{/volist}
-							</tbody>
+						<h2 class="page-header">{:__('Device')}</h2>
+						<!-- <div id="toolbar" class="toolbar">
+							<a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i class="fa fa-refresh"></i> </a>
+						</div> -->
+						<table id="table" class="table table-bordered table-hover table-nowrap" width="100%">
+						
 						</table>
-						<div class ="text-center"> <!--内容居中显示-->
-							{$userdevice->render()} <!--分页显示-->
-						</div>
 					</div>
                 </div>
             </div>

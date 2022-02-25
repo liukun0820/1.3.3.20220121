@@ -32,6 +32,8 @@ class User extends Frontend
         if (!Config::get('fastadmin.usercenter')) {
             $this->error(__('User center already closed'), '/');
         }
+		
+		$this->model = new Userdevice;
 
         //监听注册登录退出的事件
         Hook::add('user_login_successed', function ($user) use ($auth) {
@@ -67,10 +69,37 @@ class User extends Frontend
      */
     public function userdevice()
     {
-		$ud = new userdevice;
-		$rst = $ud->paginate(5);
-		$this->view->assign('userdevice', $rst);
-		$this->view->assign('title', __('User device'));
+		if ($this->request->isAjax())
+        {
+            if ($this->request->request('keyField'))
+            {
+                return $this->selectpage();
+            }
+
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+            $total = $this->model
+                    ->where($where)
+                    ->order($sort, $order)
+                    ->count();
+
+            $list = $this->model
+                    ->where($where)
+                    ->order($sort, $order)
+                    ->limit($offset, $limit)
+                    ->select();
+
+            // $list = $this->model->getList('*', $where, $sort, $order, $offset, $limit);
+
+            $list = collection($list)->toArray();
+            $result = array("total" => $total, "rows" => $list);
+
+            return json($result);
+        }
+		//$ud = new userdevice;
+		//$rst = $ud->paginate(5);
+		//$this->view->assign('userdevice', $rst);
+		//$this->view->assign('title', __('User device'));
+		//$this->view->assign(['userdevice' => $rst, 'title' => __('User device')]);
 		return $this->view->fetch();
     }
 

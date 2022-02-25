@@ -189,6 +189,50 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
                 });
 
             });
+        },
+		userdevice: function () {
+            require(['table'], function (Table) {
+
+                // 初始化表格参数配置
+                Table.api.init({
+                    extend: {
+                        index_url: 'user/userdevice',
+                    }
+                });
+
+                var table = $("#table");
+
+                // 初始化表格
+                table.bootstrapTable({
+                    url: $.fn.bootstrapTable.defaults.extend.index_url, // 请求后台的URL
+                    sortName: 'id',
+					pagination: true, // 是否显示分页
+					search: true, // 是否显示搜索
+					pageNumber: 1, // 初始化加载第一页，默认第一页
+					pageSize: 5, // 每页的记录行数
+					pageList: [5, 10, 20, 'all'], // 可供选择的每页的行数
+                    showToggle: false, // 是否显示详细视图和列表视图的切换按钮
+					showRefresh : true, // 是否显示刷新按钮
+                    showExport: true, // 是否显示导出按钮
+                    fixedColumns: true,
+                    fixedRightNumber: 1,
+                    columns: [
+                        [
+                            {field: 'id', title: __('Id'), operate: false},
+							{field: 'model', title: __('MODEL'), operate: false},
+							{field: 'is_disable', title: __('is_disable'), operate: false},
+							{field: 'user_id', title: __('user_id'), operate: false},
+							{field: 'sn', title: __('sn'), operate: false},
+							{field: 'imsi', title: __('imsi'), operate: false},
+							{field: 'imei', title: __('IMEI'), operate: false},
+							{field: 'createtime', title: __('createtime'), operate: false},
+							{field: 'updatetime', title: __('updatetime'), operate: false},
+                        ]
+                    ]
+                });
+
+
+            });
         }
     };
     return Controller;
