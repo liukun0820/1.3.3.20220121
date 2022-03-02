@@ -21,6 +21,7 @@ use app\index\model\Userdevice;
 class User extends Frontend
 {
     protected $layout = 'default';
+	protected $searchFields = 'id,sn';
     protected $noNeedLogin = ['login', 'register', 'third'];
     protected $noNeedRight = ['*'];
 
