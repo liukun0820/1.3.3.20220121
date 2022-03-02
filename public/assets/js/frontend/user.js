@@ -218,22 +218,38 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
                     fixedRightNumber: 1,
                     columns: [
                         [
-                            {field: 'id', title: __('Id'), operate: false},
-							{field: 'model', title: __('MODEL'), operate: false},
-							{field: 'is_disable', title: __('is_disable'), operate: false},
-							{field: 'user_id', title: __('user_id'), operate: false},
-							{field: 'sn', title: __('sn'), operate: false},
-							{field: 'imsi', title: __('imsi'), operate: false},
-							{field: 'imei', title: __('IMEI'), operate: false},
-							{field: 'createtime', title: __('createtime'), operate: false},
-							{field: 'updatetime', title: __('updatetime'), operate: false},
+                            {field: 'id', title: __('Id'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'model', title: __('MODEL'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'is_disable', title: __('is_disable'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'user_id', title: __('user_id'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'sn', title: __('sn'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'imsi', title: __('imsi'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
                         ]
                     ]
                 });
+				function paramsMatter(value,row,index, field) {
+					var span=document.createElement("span");
+					span.setAttribute("title",value);
+					span.innerHTML = value;
+					return span.outerHTML;
+				}
 
-
+				function formatTableUnit(value, row, index) {
+					return {
+						css: {
+							"white-space": "nowrap",
+							"text-overflow": "ellipsis",
+							"overflow": "hidden",
+							"max-width":"30px"
+						}
+					}
+				}
             });
         }
     };
+
     return Controller;
 });
