@@ -213,23 +213,31 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
 					pageList: [5, 10, 20, 'all'], // 可供选择的每页的行数
                     showToggle: false, // 是否显示详细视图和列表视图的切换按钮
 					showRefresh : true, // 是否显示刷新按钮
+					showColumns: true, // 显示隐藏列可以快速切换字段列的显示和隐藏
                     showExport: true, // 是否显示导出按钮
                     fixedColumns: true,
                     fixedRightNumber: 1,
                     columns: [
                         [
-                            {field: 'id', title: __('Id'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'model', title: __('MODEL'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'is_disable', title: __('is_disable'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'user_id', title: __('user_id'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'sn', title: __('sn'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'imsi', title: __('imsi'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
-							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter,operate: false},
+                            {field: 'id', title: __('Id'), cellStyle:formatTableUnit,formatter:paramsMatter, visible: false}, // visible: false 默认隐藏改列
+							{field: 'model', title: __('MODEL'), cellStyle:formatTableUnit,formatter:paramsMatter, operate:'LIKE'},
+							{field: 'is_disable', title: __('is_disable'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+							{field: 'user_id', title: __('user_id'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+							{field: 'sn', title: __('sn'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+							{field: 'imsi', title: __('imsi'), formatter: paramsThumb, operate: false},
+							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false}, // operate:false 禁用此字段的通用搜索
+							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
                         ]
                     ]
                 });
+				// 为表格绑定事件
+				Table.api.bindevent(table);
+				
+				function paramsThumb(value, row, index) {
+                    return '<div><a href="' + value + '" target="_blank">' + value + '</a></div>';
+                }
+			
 				function paramsMatter(value,row,index, field) {
 					var span=document.createElement("span");
 					span.setAttribute("title",value);
