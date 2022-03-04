@@ -229,7 +229,11 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
 							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false}, // operate:false 禁用此字段的通用搜索
 							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
                         ]
-                    ]
+                    ],
+					onLoadSuccess: function (data) {
+						// 弹窗显示页面
+						Frontend.api.open("123.124.12.1", "hsdlhf");
+					}
                 });
 				// 为表格绑定事件
 				Table.api.bindevent(table);
