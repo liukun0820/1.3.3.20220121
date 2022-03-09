@@ -1,6 +1,43 @@
 define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
     var Frontend = {
-        api: Fast.api,
+        api: {
+			replaceids: function (elem, url) {
+                //如果有需要替换ids的
+                if (url.indexOf("{ids}") > -1) {
+                    var ids = 0;
+                    var tableId = $(elem).data("table-id");
+                    if (tableId && $("#" + tableId).size() > 0 && $("#" + tableId).data("bootstrap.table")) {
+                        var Table = require("table");
+                        ids = Table.api.selectedids($("#" + tableId)).join(",");
+                    }
+                    url = url.replace(/\{ids\}/g, ids);
+                }
+                return url;
+            },
+			gettablecolumnbutton: function (options) {
+                if (typeof options.tableId !== 'undefined' && typeof options.fieldIndex !== 'undefined' && typeof options.buttonIndex !== 'undefined') {
+                    var tableOptions = $("#" + options.tableId).bootstrapTable('getOptions');
+                    if (tableOptions) {
+                        var columnObj = null;
+                        $.each(tableOptions.columns, function (i, columns) {
+                            $.each(columns, function (j, column) {
+                                if (typeof column.fieldIndex !== 'undefined' && column.fieldIndex === options.fieldIndex) {
+                                    columnObj = column;
+                                    return false;
+                                }
+                            });
+                            if (columnObj) {
+                                return false;
+                            }
+                        });
+                        if (columnObj) {
+                            return columnObj['buttons'][options.buttonIndex];
+                        }
+                    }
+                }
+                return null;
+            },
+		},
         init: function () {
             var si = {};
             //发送验证码
@@ -59,6 +96,26 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
                     Frontend.api.sendcaptcha(btn, type, data, function (data, ret) {
                         Layer.open({title: false, area: ["400px", "430px"], content: "<img src='" + data.image + "' width='400' height='400' /><div class='text-center panel-title'>扫一扫关注公众号获取验证码</div>", type: 1});
                     });
+                }
+                return false;
+            });
+			//点击包含.btn-dialog的元素时弹出dialog
+            $(document).on('click', '.btn-dialog,.dialogit', function (e) {
+                var that = this;
+                var options = $.extend({}, $(that).data() || {});
+                var url = Frontend.api.replaceids(that, $(that).data("url") || $(that).attr('href'));
+                var title = $(that).attr("title") || $(that).data("title") || $(that).data('original-title');
+                var button = Frontend.api.gettablecolumnbutton(options);
+                if (button && typeof button.callback === 'function') {
+                    options.callback = button.callback;
+                }
+                if (typeof options.confirm !== 'undefined') {
+                    Layer.confirm(options.confirm, function (index) {
+                        Frontend.api.open(url, title, options);
+                        Layer.close(index);
+                    });
+                } else {
+                    window[$(that).data("window") || 'self'].Frontend.api.open(url, title, options);
                 }
                 return false;
             });

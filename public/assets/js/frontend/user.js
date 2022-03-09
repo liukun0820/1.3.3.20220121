@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, undefined, Frontend, Form, Template) {
+define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], function ($, undefined, Frontend, Table, Form, Template) {
     var validatoroptions = {
         invalid: function (form, errors) {
             $.each(errors, function (i, j) {
@@ -224,22 +224,38 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
 							{field: 'is_disable', title: __('is_disable'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
 							{field: 'user_id', title: __('user_id'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
 							{field: 'sn', title: __('sn'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
-							{field: 'imsi', title: __('imsi'), formatter: paramsThumb, operate: false},
+							//{field: 'imsi', title: __('imsi'), formatter: paramsThumb, operate: false},
+							{field: 'imsi', title: __('imsi'),
+								table: table,
+								events: Table.api.events.operate,
+								buttons: [
+									{
+										name: 'detail',
+										title: __('点击查看'),
+										classname: 'btn btn-xs btn-primary btn-dialog',
+										icon: 'fa fa-list',
+										url: 'user/userdevicedetail'
+									}
+								],
+								formatter: Table.api.formatter.operate
+							},
 							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
 							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false}, // operate:false 禁用此字段的通用搜索
 							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
                         ]
                     ],
-					onLoadSuccess: function (data) {
+					/* onLoadSuccess: function (data) {
 						// 弹窗显示页面
 						Frontend.api.open("123.124.12.1", "hsdlhf");
-					}
+						Toastr.info("当前执行的是自定义搜索,搜索URL中包含login的数据");
+					} */
                 });
 				// 为表格绑定事件
 				Table.api.bindevent(table);
 				
 				function paramsThumb(value, row, index) {
-                    return '<div><a href="' + value + '" target="_blank">' + value + '</a></div>';
+                    //return '<div><a href="' + value + '" target="_blank">' + value + '</a></div>';
+					Frontend.api.open("123.124.12.1", "hsdlhf");
                 }
 			
 				function paramsMatter(value,row,index, field) {
@@ -260,7 +276,7 @@ define(['jquery', 'bootstrap', 'frontend', 'form', 'template'], function ($, und
 					}
 				}
             });
-        }
+        },
     };
 
     return Controller;

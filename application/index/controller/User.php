@@ -33,8 +33,6 @@ class User extends Frontend
         if (!Config::get('fastadmin.usercenter')) {
             $this->error(__('User center already closed'), '/');
         }
-		
-		$this->model = new Userdevice;
 
         //监听注册登录退出的事件
         Hook::add('user_login_successed', function ($user) use ($auth) {
@@ -70,21 +68,27 @@ class User extends Frontend
      */
     public function userdevice()
     {
+		$this->model = new Userdevice;
+		$this->relationSearch = true; // 允许关联
 		if ($this->request->isAjax())
         {
             if ($this->request->request('keyField'))
             {
                 return $this->selectpage();
             }
-
+			
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model
+					//->with(['user'])
                     ->where($where)
+					//->where('user_id', $this->auth->id)
                     ->order($sort, $order)
                     ->count();
 
             $list = $this->model
+					//->with(['user'])
                     ->where($where)
+					//->where('user_id', $this->auth->id)
                     ->order($sort, $order)
                     ->limit($offset, $limit)
                     ->select();
@@ -102,6 +106,24 @@ class User extends Frontend
 		//$this->view->assign('title', __('User device'));
 		//$this->view->assign(['userdevice' => $rst, 'title' => __('User device')]);
 		return $this->view->fetch();
+    }
+	
+	/**
+     * 详情
+     */
+    public function userdevicedetail($ids)
+    {
+		$this->model = new Userdevice;
+		$this->view->engine->layout("layout/userdevice");
+        $row = $this->model->get(['id' => $ids]);
+        if (!$row) {
+            $this->error(__('No Results were found'));
+        }
+        if ($this->request->isAjax()) {
+            $this->success("Ajax请求成功", null, ['id' => $ids]);
+        }
+        $this->view->assign("row", $row->toArray());
+        return $this->view->fetch();
     }
 
     /**
