@@ -115,7 +115,8 @@ class User extends Frontend
     {
 		$this->model = new Userdevice;
 		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
-        $row = $this->model->get(['id' => $ids]);
+        $row = $this->model->get(['id' => $ids])
+			->field('model,imei,sn')->find(); // 过滤需要显示的属性
         if (!$row) {
             $this->error(__('No Results were found'));
         }
