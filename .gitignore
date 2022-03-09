@@ -16,3 +16,7 @@ composer.lock
 .svn
 .vscode
 node_modules
+application/extra/addons.php
+application/admin/model/Area.php
+application/admin/controller/example/*
+application/admin/view/example/*

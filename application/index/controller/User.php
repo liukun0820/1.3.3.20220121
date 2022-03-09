@@ -114,7 +114,7 @@ class User extends Frontend
     public function userdevicedetail($ids)
     {
 		$this->model = new Userdevice;
-		$this->view->engine->layout("layout/userdevice");
+		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
         $row = $this->model->get(['id' => $ids]);
         if (!$row) {
             $this->error(__('No Results were found'));
