@@ -10,6 +10,9 @@ class Userdevice extends Model
     protected $name = 'userdevice';
 	//protected $table = 'fa_userdevice';
 	
+	// 自动写入创建和更新的时间戳字段，默认识别为整型int类型
+	//protected $autoWriteTimestamp = true;
+	
 	// 获取器的作用是在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换
 	// 如果想获取原始字段数据 使用getData('status')或者getData()
 	public function getIsDisableAttr($value)
