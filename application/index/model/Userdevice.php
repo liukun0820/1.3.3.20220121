@@ -17,6 +17,12 @@ class Userdevice extends Model
         return $status[$value];
     }
 	
+	// 修改器的作用是可以在数据赋值的时候自动进行转换处理
+	public function setSnAttr($value)
+    {
+        return strtoupper($value); // 保存数据的时候，自动转换成大写
+    }
+	
 	/* public function user()
 	{
 		return $this->belongsTo('User', 'user_id', 'id');
