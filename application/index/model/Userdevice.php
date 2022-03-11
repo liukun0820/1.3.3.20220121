@@ -10,6 +10,9 @@ class Userdevice extends Model
     protected $name = 'userdevice';
 	//protected $table = 'fa_userdevice';
 	
+	// 只读字段，用来保护某些特殊的字段值不被更改，这个字段的值一旦写入，就无法更改
+	//protected $readonly = ['imei','imsi'];
+	
 	// 自动写入创建和更新的时间戳字段，默认识别为整型int类型
 	//protected $autoWriteTimestamp = true;
 	
