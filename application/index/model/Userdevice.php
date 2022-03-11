@@ -2,6 +2,8 @@
 
 namespace app\index\model;
 use think\Model;
+// 软删除功能，需要引入SoftDelete trait
+//use traits\model\SoftDelete;
 
 class Userdevice extends Model
 {
@@ -9,6 +11,10 @@ class Userdevice extends Model
     //protected $name = 'mydevice';
     protected $name = 'userdevice';
 	//protected $table = 'fa_userdevice';
+	
+	// 软删除功能，需要引入SoftDelete trait
+	//use SoftDelete;
+    //protected $deleteTime = 'delete_time';
 	
 	// 只读字段，用来保护某些特殊的字段值不被更改，这个字段的值一旦写入，就无法更改
 	//protected $readonly = ['imei','imsi'];
