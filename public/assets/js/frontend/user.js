@@ -240,7 +240,7 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
 								formatter: Table.api.formatter.operate
 							},
 							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
-							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false}, // operate:false 禁用此字段的通用搜索
+							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime}, // operate:false 禁用此字段的通用搜索
 							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
                         ]
                     ],
