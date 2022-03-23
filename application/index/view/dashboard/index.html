@@ -1,0 +1,76 @@
+<!-- <style>
+    .tab-content > .chart {
+        padding: 10px;
+    }
+</style> -->
+<div id="content-container" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {include file="common/sidenav" /}
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+				<div class="row">
+					<div class="col-md-4">
+						<!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+								<h3>{:$ordercnt}</h3>
+
+								<p>{:__('Purchase Orders')}</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-calculator"></i>
+							</div>
+							<a href="{:url('#')}" class="small-box-footer">{:__('More')} <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<!-- small box -->
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3>{:$quotecnt}</h3>
+
+								<p>{:__('Quotations')}</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-sticky-note-o"></i>
+							</div>
+							<a href="{:url('#')}" class="small-box-footer">{:__('More')} <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<!-- small box -->
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3>{:$invoicecnt}</h3>
+
+								<p>{:__('Invoices')}</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-folder-open-o"></i>
+							</div>
+							<a href="{:url('#')}" class="small-box-footer">{:__('More')} <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="nav-tabs-custom charts-custom">
+						<!-- Tabs within a box -->
+						<ul class="nav nav-tabs pull-right">
+							<li class="active"><a href="#pie-chart" data-toggle="tab">{:__('Pie Chart')}</a></li>
+							<li><a href="#bar-chart" data-toggle="tab">{:__('Bar Chart')}</a></li>
+							<li class="pull-left header"><i class="fa fa-inbox"></i> {:__('Overview')}</li>
+						</ul>
+						<div class="tab-content no-padding">
+							<!-- Morris chart - Sales -->
+							<div class="chart tab-pane active" id="pie-chart" style="position: relative; height: 300px;"></div>
+							<div class="chart tab-pane" id="bar-chart" style="position: relative; height: 300px;"></div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

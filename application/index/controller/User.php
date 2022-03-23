@@ -244,6 +244,10 @@ class User extends Frontend
                 return false;
             }
             if ($this->auth->login($account, $password)) {
+				if(strstr($url, 'user/index') !== false)
+				{
+					$url = url('dashboard/index');
+				}
                 $this->success(__('Logged in successful'), $url ? $url : url('user/index'));
             } else {
                 $this->error($this->auth->getError(), null, ['token' => $this->request->token()]);
