@@ -82,5 +82,8 @@ return [
     'Extparam'                                   => '透传数据',
     'Createtime'                                 => '创建日期',
     'Uploadtime'                                 => '上传时间',
+	'Updatetime'                                 => '更新时间',
     'Storage'                                    => '存储引擎',
+	'MODEL'                                      => '模块',
+	'Status'                                     => '状态',
 ];

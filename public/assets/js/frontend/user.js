@@ -215,15 +215,20 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
 					showRefresh : true, // 是否显示刷新按钮
 					showColumns: true, // 显示隐藏列可以快速切换字段列的显示和隐藏
                     showExport: true, // 是否显示导出按钮
-                    fixedColumns: true,
+                    fixedColumns: true, // 固定列
                     fixedRightNumber: 1,
                     columns: [
                         [
-                            {field: 'id', title: __('Id'), cellStyle:formatTableUnit,formatter:paramsMatter, visible: false}, // visible: false 默认隐藏改列
-							{field: 'model', title: __('MODEL'), cellStyle:formatTableUnit,formatter:paramsMatter, operate:'LIKE'},
-							{field: 'is_disable', title: __('is_disable'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
-							{field: 'user_id', title: __('user_id'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
-							{field: 'sn', title: __('sn'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+                            {field: 'id', title: __('Id'), visible: false}, // visible: false 默认隐藏改列
+							{field: 'model', title: __('MODEL'), operate:'LIKE'},
+							{field: 'is_disable', 
+								title: __('Status'), 
+								custom: {"enable": 'success', "disable": 'danger'},
+								formatter: Table.api.formatter.status, // status:状态 flag:标志 files:文档 images:图片
+								operate: false
+							},
+							{field: 'user_id', title: __('user_id'), operate: false},
+							{field: 'sn', title: __('sn'), operate: false},
 							//{field: 'imsi', title: __('imsi'), formatter: paramsThumb, operate: false},
 							{field: 'imsi', title: __('imsi'),
 								table: table,
@@ -231,7 +236,8 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
 								buttons: [
 									{
 										name: 'detail',
-										title: __('点击查看'),
+										title: __('Click to view'),
+										text: __('Click to view'),
 										classname: 'btn btn-xs btn-primary btn-dialog',
 										icon: 'fa fa-list',
 										url: 'user/userdevicedetail'
@@ -239,16 +245,11 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
 								],
 								formatter: Table.api.formatter.operate
 							},
-							{field: 'imei', title: __('IMEI'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
-							{field: 'createtime', title: __('createtime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime}, // operate:false 禁用此字段的通用搜索
-							{field: 'updatetime', title: __('updatetime'), cellStyle:formatTableUnit,formatter:paramsMatter, operate: false},
+							{field: 'imei', title: __('IMEI'), operate: false},
+							{field: 'createtime', title: __('Createtime'), operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime}, // operate:false 禁用此字段的通用搜索
+							{field: 'updatetime', title: __('Updatetime'), operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         ]
                     ],
-					/* onLoadSuccess: function (data) {
-						// 弹窗显示页面
-						Frontend.api.open("123.124.12.1", "hsdlhf");
-						Toastr.info("当前执行的是自定义搜索,搜索URL中包含login的数据");
-					} */
                 });
 				// 为表格绑定事件
 				Table.api.bindevent(table);

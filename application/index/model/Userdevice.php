@@ -26,7 +26,7 @@ class Userdevice extends Model
 	// 如果想获取原始字段数据 使用getData('status')或者getData()
 	public function getIsDisableAttr($value)
     {
-        $status = [0=>'禁用',1=>'正常'];
+        $status = [0=>'enable',1=>'disable'];
         return $status[$value];
     }
 	
