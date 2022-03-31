@@ -217,6 +217,21 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
                     showExport: true, // 是否显示导出按钮
                     fixedColumns: true, // 固定列
                     fixedRightNumber: 1,
+					queryParams: function (params) {
+						//这里可以动态赋值，比如从URL中获取admin_id的值，filter.admin_id=Fast.api.query('admin_id');
+						var imei_id = Fast.api.query('imei_id');
+						if(imei_id)
+						{
+							//这里可以追加搜索条件
+							var filter = {};
+							var op = {};
+							filter.id = imei_id
+							op.id = "=";
+							params.filter = JSON.stringify(filter);
+							params.op = JSON.stringify(op);
+						}
+						return params;
+					}, 
                     columns: [
                         [
                             {field: 'id', title: __('Id'), visible: false}, // visible: false 默认隐藏改列
@@ -245,7 +260,16 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
 								],
 								formatter: Table.api.formatter.operate
 							},
-							{field: 'imei', title: __('IMEI'), operate: false},
+							{field: 'imei', title: __('IMEI'), 
+								formatter: function (value, row, index) {
+									//var url = "user/userdevice/imei_id/"+row['imei'];
+									var url = "user/userdevice/imei_id/188";
+									var title = value;
+									return '<a href="' + Fast.api.fixurl(url) + '" class="addtabsit" data-value="' + value + '" title="' + title + '">' + value + '</a>';
+								},
+								events: Table.api.events.operate,
+								operate: false
+							},
 							{field: 'createtime', title: __('Createtime'), operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime}, // operate:false 禁用此字段的通用搜索
 							{field: 'updatetime', title: __('Updatetime'), operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         ]
