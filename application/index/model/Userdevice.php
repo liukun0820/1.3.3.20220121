@@ -22,12 +22,26 @@ class Userdevice extends Model
 	// 自动写入创建和更新的时间戳字段，默认识别为整型int类型
 	//protected $autoWriteTimestamp = true;
 	
+	// 自动写入时间戳字段
+    protected $autoWriteTimestamp = 'int';
+
+    // 定义时间戳字段名
+    protected $createTime = 'createtime';
+    protected $updateTime = 'updatetime';
+    protected $deleteTime = 'deletetime';
+	
 	// 获取器的作用是在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换
 	// 如果想获取原始字段数据 使用getData('status')或者getData()
 	public function getIsDisableAttr($value)
     {
-        $status = [0=>'enable',1=>'disable'];
-        return $status[$value];
+		if($value == '1' || $value == 1)
+		{
+			return 'enable';
+		}
+		else
+		{
+			return 'disable';
+		}
     }
 	
 	// 修改器的作用是可以在数据赋值的时候自动进行转换处理
