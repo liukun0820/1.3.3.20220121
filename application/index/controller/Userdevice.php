@@ -86,14 +86,14 @@ class Userdevice extends Frontend
      */
     public function add()
     {
+		$afd = ['sn','imei','imsi','model','is_disable','user_id'];
         if ($this->request->isPost()) {
-            //$this->token();
-            $params = $this->request->post();
-			//return var_dump($params);
+            $this->token();
+            $params = $this->request->post("row/a");
             if ($params) {
                 Db::startTrans();
                 try {
-                    $result = $this->model->save($params);
+                    $result = $this->model->allowField($afd)->save($params);
                     if ($result === false) {
                         exception($this->model->getError());
                     }
