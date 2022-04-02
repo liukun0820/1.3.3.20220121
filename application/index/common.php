@@ -101,7 +101,7 @@ if (!function_exists('build_toolbar')) {
      */
     function build_toolbar($btns = null, $attr = [])
     {
-        $auth = \app\admin\library\Auth::instance();
+        //$auth = \app\admin\library\Auth::instance();
         $controller = str_replace('.', '/', strtolower(think\Request::instance()->controller()));
         $btns = $btns ? $btns : ['refresh', 'add', 'edit', 'del', 'import'];
         $btns = is_array($btns) ? $btns : explode(',', $btns);
@@ -120,9 +120,9 @@ if (!function_exists('build_toolbar')) {
         $html = [];
         foreach ($btns as $k => $v) {
             //如果未定义或没有权限
-            if (!isset($btnAttr[$v]) || ($v !== 'refresh' && !$auth->check("{$controller}/{$v}"))) {
+            /* if (!isset($btnAttr[$v]) || ($v !== 'refresh' && !$auth->check("{$controller}/{$v}"))) {
                 continue;
-            }
+            } */
             list($href, $class, $icon, $text, $title) = $btnAttr[$v];
             //$extend = $v == 'import' ? 'id="btn-import-file" data-url="ajax/upload" data-mimetype="csv,xls,xlsx" data-multiple="false"' : '';
             //$html[] = '<a href="' . $href . '" class="' . $class . '" title="' . $title . '" ' . $extend . '><i class="' . $icon . '"></i> ' . $text . '</a>';
