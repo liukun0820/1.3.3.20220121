@@ -1,0 +1,49 @@
+
+<div id="addform">
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <!-- {:token()} -->
+    <div class="form-group">
+        <label for="sn" class="control-label col-xs-12 col-sm-2">{:__('SN')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="sn" name="sn" value="" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="model" class="control-label col-xs-12 col-sm-2">{:__('MODEL')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="model" name="model" value="" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="user_id" class="control-label col-xs-12 col-sm-2">{:__('User_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="user_id" name="user_id" value="" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="imsi" class="control-label col-xs-12 col-sm-2">{:__('Imsi')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="imsi" class="form-control" id="imsi" name="imsi" value="" data-rule="required;password" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="imei" class="control-label col-xs-12 col-sm-2">{:__('Imei')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="imei" class="form-control" id="imei" name="imei" value="" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('is_disable', ['0' =>__('Enable'), '1' =>__('Disable')])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+</div>

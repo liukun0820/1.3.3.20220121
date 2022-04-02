@@ -63,70 +63,7 @@ class User extends Frontend
         return $this->view->fetch();
     }
 	
-	/**
-     * 显示用户设备
-     */
-    public function userdevice()
-    {
-		$this->model = new Userdevice;
-		$this->relationSearch = true; // 允许关联
-		if ($this->request->isAjax())
-        {
-            if ($this->request->request('keyField'))
-            {
-                return $this->selectpage();
-            }
-			
-            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-            $total = $this->model
-					//->with(['user'])
-                    ->where($where)
-					//->where('user_id', $this->auth->id)
-                    ->order($sort, $order)
-                    ->count();
-
-            $list = $this->model
-					//->with(['user'])
-                    ->where($where)
-					//->where('user_id', $this->auth->id)
-                    ->order($sort, $order)
-                    ->limit($offset, $limit)
-                    ->select();
-
-            // $list = $this->model->getList('*', $where, $sort, $order, $offset, $limit);
-
-            $list = collection($list)->toArray();
-            $result = array("total" => $total, "rows" => $list);
-
-            return json($result);
-        }
-		//$ud = new userdevice;
-		//$rst = $ud->paginate(5);
-		//$this->view->assign('userdevice', $rst);
-		//$this->view->assign('title', __('User device'));
-		//$this->view->assign(['userdevice' => $rst, 'title' => __('User device')]);
-		return $this->view->fetch();
-    }
 	
-	/**
-     * 详情
-     */
-    public function userdevicedetail($ids)
-    {
-		$this->model = new Userdevice;
-		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
-        $row = $this->model->get(['id' => $ids])
-			->field('model,imei,sn')->find(); // 过滤需要显示的属性
-        if (!$row) {
-            $this->error(__('No Results were found'));
-        }
-        if ($this->request->isAjax()) {
-            $this->success("Ajax请求成功", null, ['id' => $ids]);
-        }
-        $this->view->assign("row", $row->toArray());
-        return $this->view->fetch();
-    }
-
     /**
      * 注册会员
      */

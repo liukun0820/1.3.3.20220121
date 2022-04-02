@@ -3,11 +3,10 @@
     <head>
         {include file="common/meta" /}
         <link href="__CDN__/assets/css/user.css?v={$Think.config.site.version|htmlentities}" rel="stylesheet">
-    </head>
+	</head>
 
-    <body>
-
-        
+    <body id="custombody">
+	
         <main class="content">
             {__CONTENT__}
         </main>
@@ -15,5 +14,9 @@
         {include file="common/script" /}
 
     </body>
-
+	<style>
+		#custombody {
+			padding-top:0px;
+		}
+	</style>
 </html>
