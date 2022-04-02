@@ -3,7 +3,7 @@
 namespace app\index\model;
 use think\Model;
 // 软删除功能，需要引入SoftDelete trait
-//use traits\model\SoftDelete;
+use traits\model\SoftDelete;
 
 class Userdevice extends Model
 {
@@ -13,7 +13,7 @@ class Userdevice extends Model
 	//protected $table = 'fa_userdevice';
 	
 	// 软删除功能，需要引入SoftDelete trait
-	//use SoftDelete;
+	use SoftDelete;
     //protected $deleteTime = 'delete_time';
 	
 	// 只读字段，用来保护某些特殊的字段值不被更改，这个字段的值一旦写入，就无法更改
@@ -36,23 +36,23 @@ class Userdevice extends Model
     {
 		if($value == '1' || $value == 1)
 		{
-			return 'enable';
+			return 'disable';
 		}
 		else
 		{
-			return 'disable';
+			return 'enable';
 		}
     }
 	
 	// 修改器的作用是可以在数据赋值的时候自动进行转换处理
 	// 如果想获取原始字段数据 使用getData('status')或者getData()
-	public function setSnAttr($value)
+/* 	public function setSnAttr($value)
     {
         return strtoupper($value); // 保存数据的时候，自动转换成大写
+    } */
+
+	public function user()
+    {
+        return $this->belongsTo('User', 'user_id', 'id', [], 'LEFT')->setEagerlyType(0);
     }
-	
-	/* public function user()
-	{
-		return $this->belongsTo('User', 'user_id', 'id');
-	} */
 }

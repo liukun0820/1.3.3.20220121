@@ -79,29 +79,6 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template'], functio
                 });
 				// 为表格绑定事件
 				Table.api.bindevent(table);
-				
-				function paramsThumb(value, row, index) {
-                    //return '<div><a href="' + value + '" target="_blank">' + value + '</a></div>';
-					Frontend.api.open("123.124.12.1", "hsdlhf");
-                }
-			
-				function paramsMatter(value,row,index, field) {
-					var span=document.createElement("span");
-					span.setAttribute("title",value);
-					span.innerHTML = value;
-					return span.outerHTML;
-				}
-
-				function formatTableUnit(value, row, index) {
-					return {
-						css: {
-							"white-space": "nowrap",
-							"text-overflow": "ellipsis",
-							"overflow": "hidden",
-							"max-width":"30px"
-						}
-					}
-				}
             });
         },
 		add: function () {
