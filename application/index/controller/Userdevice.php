@@ -11,7 +11,7 @@ class Userdevice extends Frontend
 	// 不需要验证
     protected $noNeedRight = ['*'];
 	// 使用这个视图模板文件
-    protected $layout = 'userdevice';
+    protected $layout = 'default';
 	// 数据库过滤字段
 	protected $afd = ['sn','imei','imsi','model','is_disable','user_id'];
 	
@@ -29,10 +29,10 @@ class Userdevice extends Frontend
 		$this->relationSearch = true; // 允许关联
 		if ($this->request->isAjax())
         {
-            if ($this->request->request('keyField'))
+            /* if ($this->request->request('keyField'))
             {
                 return $this->selectpage();
-            }
+            } */
 			
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model
@@ -70,7 +70,7 @@ class Userdevice extends Frontend
      */
     public function detail($ids)
     {
-		//$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
+		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
         $row = $this->model->get(['id' => $ids])
 			->field('model,imei,sn')->find(); // 过滤需要显示的属性
         if (!$row) {
@@ -88,6 +88,7 @@ class Userdevice extends Frontend
      */
     public function add()
     {
+		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
         if ($this->request->isPost()) {
             $this->token();
             $params = $this->request->post("row/a");
@@ -115,6 +116,7 @@ class Userdevice extends Frontend
      */
     public function edit($ids = null)
     {
+		$this->view->engine->layout("layout/userdevice"); // 使用这个视图模板文件
         $row = $this->model->get(['id' => $ids]);
         if (!$row) {
             $this->error(__('No Results were found'));
