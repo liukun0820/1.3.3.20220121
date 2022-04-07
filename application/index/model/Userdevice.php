@@ -12,6 +12,9 @@ class Userdevice extends Model
     protected $name = 'userdevice';
 	//protected $table = 'fa_userdevice';
 	
+	//自动过滤掉不存在的字段
+    protected $field = ['sn','imei','imsi','model','is_disable','user_id'];
+	
 	// 软删除功能，需要引入SoftDelete trait
 	use SoftDelete;
     //protected $deleteTime = 'delete_time';

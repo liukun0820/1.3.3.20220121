@@ -13,7 +13,7 @@ class Userdevice extends Frontend
 	// 使用这个视图模板文件
     protected $layout = 'default';
 	// 数据库过滤字段
-	protected $afd = ['sn','imei','imsi','model','is_disable','user_id'];
+	//protected $afd = ['sn','imei','imsi','model','is_disable','user_id'];
 	
 	 public function _initialize()
     {
@@ -95,7 +95,8 @@ class Userdevice extends Frontend
             if ($params) {
                 Db::startTrans();
                 try {
-                    $result = $this->model->allowField($this->afd)->save($params);
+                    //$result = $this->model->allowField($this->afd)->save($params);
+					$result = $this->model->save($params);
                     if ($result === false) {
                         exception($this->model->getError());
                     }
