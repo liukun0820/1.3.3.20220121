@@ -3,8 +3,10 @@
 namespace app\index\controller;
 
 use think\Db;
+use think\Hook;
 use app\common\controller\Frontend;
 use app\index\model\Userdevice as Userdevicemodel;
+use app\index\model\SaveLog;
 
 class Userdevice extends Frontend
 {
@@ -100,6 +102,8 @@ class Userdevice extends Frontend
                     if ($result === false) {
                         exception($this->model->getError());
                     }
+					SaveLog::setTitle('add');
+					Hook::listen('app_savelog');
                     Db::commit();
                 } catch (\Exception $e) {
                     Db::rollback();
