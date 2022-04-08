@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefined, Backend, Table, Form) {
+define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function ($, undefined, Backend, Table, Form, Template) {
 
     var Controller = {
         index: function () {
@@ -30,6 +30,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 return value.toString().replace(/(&|&amp;)nbsp;/g, '&nbsp;');
                             }
                         },
+						{field: 'icon', title: __('Icon'), formatter: Controller.api.formatter.icon},
                         {field: 'name', title: __('Name'), align: 'left'},
                         {field: 'remark', title: __('Remark')},
                         {field: 'ismenu', title: __('Ismenu'), formatter: Table.api.formatter.toggle},
@@ -55,6 +56,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             Controller.api.bindevent();
         },
         api: {
+			formatter: {
+				icon: function (value, row, index) {
+                    return '<span class="' + (!row.ismenu || row.status == 'hidden' ? 'text-muted' : '') + '"><i class="' + value + '"></i></span>';
+                },
+			},
             bindevent: function () {
                 $(document).on('click', "input[name='row[ismenu]']", function () {
                     var name = $("input[name='row[name]']");
@@ -62,6 +68,42 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 });
                 $("input[name='row[ismenu]']:checked").trigger("click");
                 Form.api.bindevent($("form[role=form]"));
+				
+				var iconlist = [];
+                var iconfunc = function () {
+                    Layer.open({
+                        type: 1,
+                        area: ['99%', '98%'], //宽高
+                        content: Template('chooseicontplet', {iconlist: iconlist})
+                    });
+                };
+				$(document).on('change keyup', "#icon", function () {
+                    $(this).prev().find("i").prop("class", $(this).val());
+                });
+                $(document).on('click', ".btn-search-icon", function () {
+                    if (iconlist.length == 0) {
+                        $.get(Config.site.cdnurl + "/assets/libs/font-awesome/less/variables.less", function (ret) {
+                            var exp = /fa-var-(.*):/ig;
+                            var result;
+                            while ((result = exp.exec(ret)) != null) {
+                                iconlist.push(result[1]);
+                            }
+                            iconfunc();
+                        });
+                    } else {
+                        iconfunc();
+                    }
+                });
+                $(document).on('click', '#chooseicon ul li', function () {
+                    $("input[name='row[icon]']").val('fa fa-' + $(this).data("font")).trigger("change");
+                    Layer.closeAll();
+                });
+                $(document).on('keyup', 'input.js-icon-search', function () {
+                    $("#chooseicon ul li").show();
+                    if ($(this).val() != '') {
+                        $("#chooseicon ul li:not([data-font*='" + $(this).val() + "'])").hide();
+                    }
+                });
             }
         }
     };
