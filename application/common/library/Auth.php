@@ -23,6 +23,7 @@ class Auth
     protected $keeptime = 2592000;
     protected $requestUri = '';
     protected $rules = [];
+	protected $menulist = [];
     //默认配置
     protected $config = [];
     protected $options = [];
@@ -393,6 +394,32 @@ class Auth
     }
 
     /**
+     * 获取会员组别规则列表的菜单并排序
+     * @return array
+     */
+    public function getRuleListMenu()
+    {
+        if ($this->menulist) {
+            return $this->menulist;
+        }
+		if(!$this->_user)
+			return [];
+        $group = $this->_user->group;
+        if (!$group) {
+            return [];
+        }
+        $rules = explode(',', $group->rules);
+        $this->menulist = UserRule::where('status', 'normal')
+					->where('id', '>', 12)
+					->where('id', 'in', $rules)
+					->where('ismenu', 1)
+					->order('weigh', 'desc')
+					->field('name,title,icon')
+					->select();
+        return $this->menulist;
+    }
+	
+	/**
      * 获取会员组别规则列表
      * @return array
      */

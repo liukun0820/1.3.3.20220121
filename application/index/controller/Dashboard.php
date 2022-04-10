@@ -21,7 +21,8 @@ use think\Db;
 class Dashboard extends Frontend
 {
 	protected $layout = 'default';  // 使用的模板
-	protected $noNeedRight = ['*']; // 需要登陆，但是不需要认证，如果打开页面提示没有权限，就是没有添加这个
+	protected $noNeedLogin = [];
+	protected $noNeedRight = [];
 	
     /**
      * 查看

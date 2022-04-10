@@ -107,6 +107,8 @@ class Frontend extends Controller
             }
         }
 
+		$menulist = $this->auth->getRuleListMenu();
+		$this->view->assign('menulist', $menulist);
         $this->view->assign('user', $this->auth->getUser());
 
         // 语言检测
