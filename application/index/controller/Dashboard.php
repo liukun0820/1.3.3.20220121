@@ -33,10 +33,10 @@ class Dashboard extends Frontend
 		$quotecnt = 33;
 		$invoicecnt = 55;
 		if ($this->request->isAjax()) {
-			$result = array("total" => 4, 
-						"datas" => [["value" => $ordercnt,"name" => __('Purchase Orders')],
-									["value" => $quotecnt,"name" => __('Quotations')],
-									["value" => $invoicecnt,"name" => __('Invoices')]]
+			$result = array("total" => 3, 
+						"datas" => [["value" => $ordercnt,"url" => "userdevice/index","name" => __('Purchase Orders')],
+									["value" => $quotecnt,"url" => "userdevice/index","name" => __('Quotations')],
+									["value" => $invoicecnt,"url" => "userdevice/index","name" => __('Invoices')]]
 						);
 
             return json($result);
