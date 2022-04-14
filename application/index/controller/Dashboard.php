@@ -32,12 +32,23 @@ class Dashboard extends Frontend
 		$ordercnt = 12;
 		$quotecnt = 33;
 		$invoicecnt = 55;
+
 		if ($this->request->isAjax()) {
-			$result = array("total" => 3, 
-						"datas" => [["value" => $ordercnt,"url" => "userdevice/index","name" => __('Purchase Orders')],
-									["value" => $quotecnt,"url" => "userdevice/index","name" => __('Quotations')],
-									["value" => $invoicecnt,"url" => "userdevice/index","name" => __('Invoices')]]
-						);
+			$result = array(
+				"piebardata" =>
+				["total" => 3, 
+				"datas" => [["value" => $ordercnt,"url" => "userdevice/index","name" => __('Purchase Orders')],
+							["value" => $quotecnt,"url" => "userdevice/index","name" => __('Quotations')],
+							["value" => $invoicecnt,"url" => "userdevice/index","name" => __('Invoices')]
+							]
+				],
+				"treedata" =>
+				["datas" => [["quote1" => ["id" => 1, "order" => ["id" => 2, "traceing" => ["id" => 3, "invoice" => ["id" => 4]]]]],
+							["quote2" => ["id" => 5, "order" => ["id" => 6, "traceing" => ["id" => 7, "invoice" => ["id" => 8]]]]],
+							["quote3" => ["id" => 9, "order" => ["id" => 10, "traceing" => ["id" => 11, "invoice" => ["id" => 12]]]]]
+							]
+				]
+			);
 
             return json($result);
 		}

@@ -70,6 +70,21 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="nav-tabs-custom charts-custom">
+						<!-- Tabs within a box -->
+						<ul class="nav nav-tabs pull-right">
+							<li class="active"><a href="#quote-tree-chart" data-toggle="tab">{:__('Quote1 Chart')}</a></li>
+							<li><a href="#order-tree-chart" data-toggle="tab">{:__('Quote2 Chart')}</a></li>
+							<li class="pull-left header"><i class="fa fa-inbox"></i> {:__('Overview')}</li>
+						</ul>
+						<div class="tab-content no-padding">
+							<!-- Morris chart - Sales -->
+							<div class="chart tab-pane active" id="quote-tree-chart" style="position: relative; height: 300px;"></div>
+							<div class="chart tab-pane" id="order-tree-chart" style="position: relative; height: 300px;"></div>
+						</div>
+					</div>
+				</div>
             </div>
         </div>
     </div>
