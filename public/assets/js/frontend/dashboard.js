@@ -18,29 +18,63 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 			var barChart = Echarts.init(document.getElementById('bar-chart'), 'shine');
 			var quoteChart = Echarts.init(document.getElementById('quote-tree-chart'), 'shine');
 			var orderChart = Echarts.init(document.getElementById('order-tree-chart'), 'shine');
+			
 			$.get('dashboard/index', function (data) {
+				let idata = [];
+				for (let d in data.piebardata.datas) {
+					idata.push(data.piebardata.datas[d].name);
+				}
 				pieChart.setOption({
 					tooltip: {
 						trigger: 'item',
 						formatter: '{b}: {c} ({d}%)'
 					},
-					legend: {
+					/* legend: {
 						orient: 'vertical',
-						left: 10,
+						left: 6,
+					}, */
+					grid: { // 折线图，柱状图，散点图（气泡图）是使用grid（网格）来控制位置的
+						top: '10%',
+						left: '55%',
+						bottom: '10%',
+						right: '2%'
 					},
+					xAxis: {
+						data: idata
+					},
+					yAxis: {},
 					series: [
 						{
 							name: __('Overview'),
 							type: 'pie',
+							top: '5%',
+							left: '5%',
+							bottom: '5%',
+							right: '50%',
 							//radius: ['50%', '80%'], // 环形
+							data: data.piebardata.datas
+						},
+						{
+							name: __('Count'),
+							type: 'bar',
+							itemStyle: {
+							  normal: {
+								//这里是重点
+								color: function(params) {
+								  //给大于颜色数量的柱体添加循环颜色的判断
+								  let lindex = params.dataIndex;
+								  while (lindex >= colorList.length) {
+									  lindex -= colorList.length;
+								  }
+								  return colorList[lindex]
+								}
+							  }
+							},
 							data: data.piebardata.datas
 						}
 					]
 				});
-				let idata = [];
-				for (let d in data.piebardata.datas) {
-					idata.push(data.piebardata.datas[d].name);
-				}
+				
 				barChart.setOption({
 					tooltip: {
 						trigger: 'item',
@@ -49,6 +83,12 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 					//legend: {
 					//	data:[__('Count')]
 					//},
+					grid: { // 折线图，柱状图，散点图（气泡图）是使用grid（网格）来控制位置的
+						top: '10%',
+						left: '10%',
+						bottom: '10%',
+						right: '10%'
+					},
 					xAxis: {
 						data: idata
 					},

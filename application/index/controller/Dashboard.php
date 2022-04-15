@@ -37,7 +37,7 @@ class Dashboard extends Frontend
 			$result = array(
 				"piebardata" =>
 				["total" => 3, 
-				"datas" => [["value" => $ordercnt,"url" => "userdevice/index","name" => __('Purchase Orders')],
+				"datas" => [["value" => $ordercnt,"url" => "userdevice/index","name" => __('Orders')],
 							["value" => $quotecnt,"url" => "userdevice/index","name" => __('Quotations')],
 							["value" => $invoicecnt,"url" => "userdevice/index","name" => __('Invoices')]
 							]
