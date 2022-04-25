@@ -29,7 +29,14 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						trigger: 'item',
 						formatter: '{b}: {c} ({d}%)'
 					},
-					graphic: {
+					toolbox: {
+						feature: { // 保存为图片
+							saveAsImage: {
+								title: __('Save as image'),
+							},
+						},
+					},
+					graphic: { // 水印
 						type: 'text',
 						silent:true,
 						left: '1%',
@@ -48,7 +55,7 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						{
 							name: __('Overview'),
 							type: 'pie',
-							top: '5%',
+							top: '8%',
 							left: '5%',
 							bottom: '5%',
 							right: '5%',
@@ -66,7 +73,7 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 					//legend: {
 					//	data:[__('Count')]
 					//},
-					graphic: {
+					graphic: { // 水印
 						type: 'text',
 						silent:true,
 						left: '1%',
@@ -77,6 +84,20 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 							fontSize:14,
 						}
 					},
+					toolbox: {
+						feature: {
+							magicType: { // 柱状图和折线图切换
+								type: ['line', 'bar'],
+								title: {
+									line: __('Switch to line chart'),
+									bar: __('Switch to bar chart'),
+								},
+							},
+							saveAsImage: { // 保存为图片
+								title: __('Save as image'),
+							},
+						},
+					},
 					grid: { // 折线图，柱状图，散点图（气泡图）是使用grid（网格）来控制位置的
 						top: '10%',
 						left: '10%',
@@ -84,6 +105,10 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						right: '10%'
 					},
 					xAxis: {
+						axisLabel: {
+							show: true,
+							interval: 0, // 解决X轴数据长显示不全问题
+						},
 						data: idata
 					},
 					yAxis: {},
@@ -165,6 +190,13 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 							text: 'test.net',
 							fontSize:14,
 						}
+					},
+					toolbox: {
+						feature: {
+							saveAsImage: {
+								title: __('Save as image'),
+							},
+						},
 					},
 				  series: [
 					{
