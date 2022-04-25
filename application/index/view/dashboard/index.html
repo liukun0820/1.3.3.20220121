@@ -59,14 +59,18 @@
 					<div class="nav-tabs-custom charts-custom">
 						<!-- Tabs within a box -->
 						<ul class="nav nav-tabs pull-right">
-							<li class="active"><a href="#pie-chart" data-toggle="tab">{:__('Pie Chart')}</a></li>
-							<li><a href="#bar-chart" data-toggle="tab">{:__('Bar Chart')}</a></li>
+							<!-- <li class="active"><a href="#pie-chart" data-toggle="tab">{:__('Pie Chart')}</a></li>
+							<li><a href="#bar-chart" data-toggle="tab">{:__('Bar Chart')}</a></li> -->
 							<li class="pull-left header"><i class="fa fa-inbox"></i> {:__('Overview')}</li>
 						</ul>
 						<div class="tab-content no-padding">
 							<!-- Morris chart - Sales -->
-							<div class="chart tab-pane active" id="pie-chart" style="position: relative; height: 300px;"></div>
-							<div class="chart tab-pane" id="bar-chart" style="position: relative; height: 300px;"></div>
+							<div class="col-md-6">
+								<div class="chart tab-pane active" id="pie-chart" style="position: relative; height: 300px;"></div>
+							</div>
+							<div class="col-md-6">
+								<div class="chart tab-pane" id="bar-chart" style="position: relative; height: 300px;"></div>
+							</div>
 						</div>
 					</div>
 				</div>

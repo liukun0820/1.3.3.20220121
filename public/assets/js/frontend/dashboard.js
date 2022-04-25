@@ -29,20 +29,21 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						trigger: 'item',
 						formatter: '{b}: {c} ({d}%)'
 					},
-					/* legend: {
+					graphic: {
+						type: 'text',
+						silent:true,
+						left: '1%',
+						bottom: '1%',
+						style: {
+							fill: 'rgba(0,0,0,0.3)',
+							text: 'test.net',
+							fontSize:14,
+						}
+					},
+					legend: {
 						orient: 'vertical',
 						left: 6,
-					}, */
-					grid: { // 折线图，柱状图，散点图（气泡图）是使用grid（网格）来控制位置的
-						top: '10%',
-						left: '55%',
-						bottom: '10%',
-						right: '2%'
 					},
-					xAxis: {
-						data: idata
-					},
-					yAxis: {},
 					series: [
 						{
 							name: __('Overview'),
@@ -50,26 +51,8 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 							top: '5%',
 							left: '5%',
 							bottom: '5%',
-							right: '50%',
+							right: '5%',
 							//radius: ['50%', '80%'], // 环形
-							data: data.piebardata.datas
-						},
-						{
-							name: __('Count'),
-							type: 'bar',
-							itemStyle: {
-							  normal: {
-								//这里是重点
-								color: function(params) {
-								  //给大于颜色数量的柱体添加循环颜色的判断
-								  let lindex = params.dataIndex;
-								  while (lindex >= colorList.length) {
-									  lindex -= colorList.length;
-								  }
-								  return colorList[lindex]
-								}
-							  }
-							},
 							data: data.piebardata.datas
 						}
 					]
@@ -83,10 +66,21 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 					//legend: {
 					//	data:[__('Count')]
 					//},
+					graphic: {
+						type: 'text',
+						silent:true,
+						left: '1%',
+						bottom: '1%',
+						style: {
+							fill: 'rgba(0,0,0,0.3)',
+							text: 'test.net',
+							fontSize:14,
+						}
+					},
 					grid: { // 折线图，柱状图，散点图（气泡图）是使用grid（网格）来控制位置的
 						top: '10%',
 						left: '10%',
-						bottom: '10%',
+						bottom: '15%',
 						right: '10%'
 					},
 					xAxis: {
@@ -112,6 +106,7 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						data: data.piebardata.datas
 					}]
 				});
+				//echarts.connect([pieChart,barChart]);
 				const datai = {
  "name": "报价单1",
  "url": "quotes/1",
@@ -160,6 +155,17 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 					showContent: true, //是否显示提示框浮层，默认显示。
 					enterable: false // 鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
 				  },
+				  graphic: {
+						type: 'text',
+						silent:true,
+						left: '1%',
+						bottom: '1%',
+						style: {
+							fill: 'rgba(0,0,0,0.3)',
+							text: 'test.net',
+							fontSize:14,
+						}
+					},
 				  series: [
 					{
 					  type: 'tree',
@@ -214,6 +220,12 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 				//console.log(params.data.name+' '+params.data.value+' '+params.data.url);
 				window.location.href=Fast.api.fixurl(params.data.url);
 			});
+			// 分别设置每个实例的 group id
+			//pieChart.group = 'group1';
+			//barChart.group = 'group1';
+			//barChart.connect('group1');
+			// 或者可以直接传入需要联动的实例数组
+			//barChart.connect([pieChart]);
         }
     };
     return Controller;
