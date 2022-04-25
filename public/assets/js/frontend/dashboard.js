@@ -17,7 +17,6 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 			var pieChart = Echarts.init(document.getElementById('pie-chart'), 'shine');
 			var barChart = Echarts.init(document.getElementById('bar-chart'), 'shine');
 			var quoteChart = Echarts.init(document.getElementById('quote-tree-chart'), 'shine');
-			var orderChart = Echarts.init(document.getElementById('order-tree-chart'), 'shine');
 			
 			$.get('dashboard/index', function (data) {
 				let idata = [];
@@ -221,7 +220,10 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 						position: 'left',
 						verticalAlign: 'middle',
 						align: 'right',
-						fontSize: 19 // 文字大小
+						fontSize: 19, // 文字大小
+						// 解决暗黑模式显示问题
+						textBorderColor: '#ffffff', // 文字边颜色
+						textBorderWidth: 2,         // 文字边宽度
 					  },
 					  leaves: { //叶子节点的配置
 						collapsed: null, // 如果为 true，表示此节点默认折叠。
@@ -240,9 +242,6 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 					}
 					]
 				});
-				orderChart.setOption({
-					
-				});
 			}, 'json');
 			pieChart.on('click', function(params) {
 				//console.log(params.data.name+' '+params.data.value+' '+params.data.url);
@@ -251,6 +250,11 @@ define(['jquery', 'bootstrap', 'frontend', 'table', 'form', 'template', 'echarts
 			barChart.on('click', function(params) {
 				//console.log(params.data.name+' '+params.data.value+' '+params.data.url);
 				window.location.href=Fast.api.fixurl(params.data.url);
+			});
+			window.addEventListener("resize",function(){ // 随着窗口的变化而变化，自动使用窗口大小
+				quoteChart.resize();
+				pieChart.resize();
+				barChart.resize();
 			});
 			// 分别设置每个实例的 group id
 			//pieChart.group = 'group1';
